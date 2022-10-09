@@ -64,13 +64,14 @@ public class Cliente {
         return tarjetasCliente;
     }
 
+
     /**
      * ToString del clinente para poder utilizarlo en listar clientes y mostrar su informacion correspondiente
      * @return
      */
     @Override
     public String toString() {
-        return "{ Nombre:'" + nombre + '\'' +
+        return "{ Nombre::'" + nombre + '\'' +
                 ", identificacion: " + identificacion +
                 ", fecha nacimiento: " + fechaNacimiento + '\'' +
                 ", edad: " + edad +
