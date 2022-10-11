@@ -8,7 +8,7 @@ public class Tarjeta {
     private int identificacion;
 
     public static double saldo;
-    public int numeroCuenta;//BIN
+    public int numeroCuenta;
 
     /**
      * Constructor con los atributos de tarjeta
