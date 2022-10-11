@@ -50,7 +50,7 @@ public class Banco {
             } else if (opcion == 5) {
                 int idCliente = UI.mostrarIdentificacion();
                 int numeroTarjeta = UI.mostrarNumeroCuenta();
-                realizarRetiro(idCliente, numeroTarjeta);/*Realizar retiro*/
+                realizarRetiro(idCliente, numeroTarjeta);
             } else if (opcion == 6) {
                 UI.mostrarSaldo();
             } else if (opcion == 7) {
@@ -118,16 +118,26 @@ public class Banco {
     public static void realizarDeposito(int identificacion, int numeroCuenta) {
         for (Tarjeta conjuntoCuenta : conjuntoCuentas) {
             if (conjuntoCuenta.getIdentificacion() == identificacion && conjuntoCuenta.getNumeroCuenta() == numeroCuenta) {
-                double nuevoSaldo = Tarjeta.getSaldo() + UI.realizarDeposito();
-                if (nuevoSaldo >= 0) {
-                    Tarjeta.setSaldo(nuevoSaldo);
+                double nuevoSaldo = conjuntoCuenta.getSaldo() + verificarDeposito();
+                if (nuevoSaldo > 0 && conjuntoCuenta.getNumeroCuenta()==numeroCuenta) {
+                    conjuntoCuenta.setSaldo(nuevoSaldo);
                 } else if (nuevoSaldo < 0) {
                     UI.errorDeposito();
                 }
+
             } else {
                 UI.errorIdentificacion();
             }
         }
+    }
+
+    public static double verificarDeposito(){
+        double deposito= 0;
+
+        while (deposito <= 0) {
+            deposito= UI.realizarDeposito();
+        }
+        return deposito;
     }
 
     /**
@@ -138,7 +148,7 @@ public class Banco {
     public static void realizarRetiro(int identificacion, int numeroCuenta) {
         for (Tarjeta conjuntoCuenta : conjuntoCuentas) {
             if (conjuntoCuenta.getIdentificacion() == identificacion && conjuntoCuenta.getNumeroCuenta() == numeroCuenta) {
-                double plataCuenta = UI.realizarRetiro();
+                double plataCuenta = verificarRetiro();
                 double nuevoSaldo = Tarjeta.getSaldo() - plataCuenta;
                 if (plataCuenta >= 0 && plataCuenta <= Tarjeta.getSaldo()) {
                     Tarjeta.setSaldo(nuevoSaldo);
@@ -152,6 +162,17 @@ public class Banco {
             }
         }
     }
+
+    public static double verificarRetiro(){
+        double retiro= 0;
+
+        while (retiro <= 0) {
+            retiro= UI.realizarRetiro();
+        }
+        return retiro;
+    }
+
+
 
     /**
      *Funcion que permite mostrar el numero de tarjeta si es el caso que el cliente tiene y si no, mostrar que no existe
