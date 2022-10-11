@@ -76,7 +76,6 @@ public class Cliente {
                 ", fecha nacimiento: " + fechaNacimiento + '\'' +
                 ", edad: " + edad +
                 ", direccion: " + direccion + '\'' +
-                ", tarjetasCliente: " + tarjetasCliente +
                 '}';
     }
 }
